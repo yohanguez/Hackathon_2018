@@ -22,7 +22,9 @@
                     <a href="http://www.jquery2dotnet.com">
                         <i class="glyphicon glyphicon-globe"></i>
                     </a> Sign Up and Join Our Community!</legend>
-                <form action="#" method="post" class="form" role="form">
+                <form action="http://localhost:5001/register_account"
+                      method="post" class="form" enctype=multipart/form-data
+                      role="form">
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                             <input class="form-control" name="firstname" placeholder="First Name" type="text" required autofocus />
@@ -34,7 +36,7 @@
                     <input class="form-control" name="youremail" placeholder="Your Email" type="email" />
                     <input class="form-control" name="reenteremail" placeholder="Re-enter Email" type="email" />
                     <input class="form-control" name="password" placeholder="New Password" type="password" />
-                    <label for="">
+                    <label>
                         Birth Date</label>
                     <div class="row">
                         <div class="col-xs-4 col-md-4">
@@ -63,7 +65,9 @@
                     <br />
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4">
-                            <input type="file" onchange="previewFile()">
+                            <input type="file"
+                                   name="original_pic"
+                                   onchange="previewFile()">
                             <br>
                             <img src="" height="200">
                         </div>

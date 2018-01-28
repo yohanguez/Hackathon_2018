@@ -30,14 +30,36 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/', methods=['GET', 'POST'])
+'''
+/register_account
+```
+{
+   "first_name": "Or Rez",     
+   "last_name": "Rez",    
+   "email": "or.rez@gmail.com",  
+   "uploaded_image": base64encodedimage,
+   "webcam_image_simple": base64encodedimage2,
+   "webcam_image_smiling": base64encodedimage3,
+}
+```
+JSON result:
+```
+{
+   "same_image": True,   
+   "same_image_and_smiling_image": True, 
+}
+```
+'''
+
+
+@app.route('/register_account', methods=['POST'])
 def upload_image():
     # Check if a valid image file was uploaded
     if request.method == 'POST':
-        if 'file' not in request.files:
+        if 'original_pic' not in request.files:
             return redirect(request.url)
 
-        file = request.files['file']
+        file = request.files['original_pic']
 
         if file.filename == '':
             return redirect(request.url)

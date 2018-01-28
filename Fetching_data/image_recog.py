@@ -70,8 +70,7 @@ class Image_recog:
 
             face_landmarks_list = face_recognition.face_landmarks(image)
 
-            #
-            # print("I found {} face(s) in this photograph.".format(len(face_landmarks_list)))
+            #print("I found {} face(s) in this photograph.".format(len(face_landmarks_list)))
 
             for face_landmarks in face_landmarks_list:
 
@@ -121,7 +120,7 @@ class Image_recog:
 
 
 
-test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png", "/Users/carlalasry/Desktop/carla_smile.jpg", "/Users/carlalasry/Desktop/carla_not_smile.jpg")
+test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png", "/Users/carlalasry/Downloads/arthur.jpg", "/Users/carlalasry/Desktop/carla_smile.jpg", "/Users/carlalasry/Desktop/carla_not_smile.jpg")
 print(test_reco.check_similarity())
 #print(test_reco.similarity)
 print(test_reco.check_is_smiling())
