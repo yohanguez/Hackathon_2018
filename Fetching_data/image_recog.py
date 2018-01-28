@@ -125,4 +125,3 @@ print(test_reco.check_similarity())
 #print(test_reco.similarity)
 print(test_reco.check_is_smiling())
 #print(test_reco.is_smiling)
-
