@@ -3,15 +3,14 @@ from PIL import Image, ImageDraw
 
 class Image_recog:
     """Checks similarity between two images"""
-    def __init__(self, im1, im2, im_smiling, im_not_smiling):
+    def __init__(self, im1, im_smiling, im_not_smiling):
         self.im_known = im1
-        self.im_unknown = im2
         self.im_smiling = im_smiling
         self.im_not_smiling = im_not_smiling
 
     def check_similarity(self):
         known_image = face_recognition.load_image_file(self.im_known)
-        unknown_image = face_recognition.load_image_file(self.im_unknown)
+        unknown_image = face_recognition.load_image_file(self.im_not_smiling)
 
         known_encoding = face_recognition.face_encodings(known_image)[0]
         unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
