@@ -1,6 +1,7 @@
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
+var fd;
 
 function previewFile() {
     var preview = document.querySelector('img');
@@ -31,9 +32,19 @@ function take_snapshot() {
     Webcam.snap(function (data_uri) {
         // Send data_uri to the backend.
         var blob = dataURItoBlob(data_uri);
-        var fd = new FormData(document.forms.namedItem('regForm'));
-        fd.append("webcam_pic_1", blob,
-            "webcam_pic_1.jpg");
+        fd = new FormData(document.forms.namedItem('regForm'));
+        fd.append("webcam_pic", blob,
+            "webcam_pic.jpg");
+    });
+}
+
+function take_smiling_snapshot() {
+    // take snapshot and get image data
+    Webcam.snap(function (data_uri) {
+        // Send data_uri to the backend.
+        var blob = dataURItoBlob(data_uri);
+        fd.append("webcam_pic_smiling", blob,
+            "webcam_pic_smiling.jpg");
 
         var request = new XMLHttpRequest();
         request.open("POST", "http://localhost:5001/register_account");

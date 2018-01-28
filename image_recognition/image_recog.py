@@ -232,6 +232,5 @@ class Image_recog:
 #test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png",
  #"/Users/carlalasry/Desktop/carla_smile.jpg",
         # "/Users/carlalasry/Desktop/carla_not_smile.jpg")
-#print(test_reco.is_similar())
-#print(test_reco.is_smiling())
+
 

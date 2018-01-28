@@ -4,36 +4,46 @@
 <head>
     <title>HACKATHON 2018</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-        crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
-                <legend>
-                    <i class="glyphicon glyphicon-globe"></i> Sign Up and Join Our Community!
-                </legend>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
+            <legend>
+                <i class="glyphicon glyphicon-globe"></i> Sign Up and Join Our
+                Community!
+            </legend>
 
-                <form action="http://localhost:5001/register_account" method="POST" class="form" enctype=multipart/form-data role="form"
-                    id="regForm">
+            <form action="http://localhost:5001/register_account" method="POST"
+                  class="form" enctype=multipart/form-data role="form"
+                  id="regForm">
 
-                    <div class="tab">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="firstname" placeholder="First Name" type="text" required autofocus/>
-                            </div>
-                            <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="lastname" placeholder="Last Name" type="text" required/>
-                            </div>
+                <div class="tab">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">
+                            <input class="form-control" name="firstname"
+                                   placeholder="First Name" type="text"
+                                   required autofocus/>
                         </div>
+                        <div class="col-xs-6 col-md-6">
+                            <input class="form-control" name="lastname"
+                                   placeholder="Last Name" type="text"
+                                   required/>
+                        </div>
+<<<<<<< HEAD
                         <input class="form-control" name="youremail" placeholder="Your Email" type="email" />
                         <input class="form-control" name="password" placeholder="New Password" type="password" />
                         <label>
@@ -42,65 +52,89 @@
                             <div class="col-xs-8 col-md-8">
                                 <input class="form-control" type="date" name="bday" placeholder="DD/MM/YYYY">
                             </div>
-                        </div>
-                        <label class="radio-inline">
-                            <input type="radio" name="sex" id="inlineCheckbox1" value="male" /> Male
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="sex" id="inlineCheckbox2" value="female" /> Female
-                        </label>
-                        <br/>
-                        <br/>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-4">
-                                <input type="file" name="original_pic" onchange="previewFile()">
-                                <br>
-                                <img src="" height="200">
-                            </div>
+=======
+                    </div>
+                    <input class="form-control" name="youremail"
+                           placeholder="Your Email" type="email"/>
+                    <input class="form-control" name="password"
+                           placeholder="New Password" type="password"/>
+                    <label>
+                        Birth Date</label>
+                    <div class="row">
+                        <div class="col-xs-8 col-md-8">
+                            <input class="form-control" name="date"
+                                   placeholder="DD/MM/YYYY" type="text"
+                                   required>
+>>>>>>> refs/remotes/origin/master
                         </div>
                     </div>
-
-                </form>
-
-                <div class="tab">
-                    <!--webcam stuff-->
-                    <div>
-                        <div id="my_camera"></div>
-                        Verification:
-                        <!-- A button for taking snaps -->
-
-                        <input type=button value="Take Snapshot" onClick="take_snapshot()">
-
-
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">
-                            Sign up
-                        </button>
+                    <label class="radio-inline">
+                        <input type="radio" name="sex" id="inlineCheckbox1"
+                               value="male"/> Male
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="sex" id="inlineCheckbox2"
+                               value="female"/> Female
+                    </label>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <input type="file" name="original_pic"
+                                   onchange="previewFile()">
+                            <br>
+                            <img src="" height="200">
+                        </div>
                     </div>
-
                 </div>
 
-                <!--<button type="button" id="prevBtn" onclick="nextPrev(-1)">-->
-                <!--Previous-->
-                <!--</button>-->
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">
-                    Next
+            </form>
 
-                </button>
+            <div class="tab">
+                <!--webcam stuff-->
+                <div>
+                    <div id="my_camera"></div>
+                    Verification:
+                    <!-- A button for taking snaps -->
 
-                <!-- Circles which indicates the steps of the form: -->
-                <div style="text-align:center;margin-top:40px;">
-                    <span class="step"></span>
-                    <span class="step"></span>
+                    <input type=button value="Regular Picture"
+                           onClick="take_snapshot()">
+
+                    <input type=button value="Smiling Picture"
+                           onClick="take_smiling_snapshot()">
+
+                    <button class="btn btn-lg btn-primary btn-block"
+                            type="submit">
+                        Sign up
+                    </button>
                 </div>
+
+            </div>
+
+            <!--<button type="button" id="prevBtn" onclick="nextPrev(-1)">-->
+            <!--Previous-->
+            <!--</button>-->
+            <button type="button" id="nextBtn" onclick="nextPrev(1)">
+                Next
+
+            </button>
+
+            <!-- Circles which indicates the steps of the form: -->
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+</div>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-    <script type="text/javascript" src="JS/webcam.min.js"></script>
-    <script src="./JS/script.js"></script>
+<script type="text/javascript" src="JS/webcam.min.js"></script>
+<script src="./JS/script.js"></script>
 </body>
 
 </html>
