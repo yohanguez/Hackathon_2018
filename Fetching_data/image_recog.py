@@ -7,7 +7,10 @@ class Image_recog:
         self.im_known = im1
         self.im_smiling = im_smiling
         self.im_not_smiling = im_not_smiling
-
+    '''
+    Return true if self.im_known and im_not_smiling are the same person (or 
+    false if they are not)
+    '''
     def check_similarity(self):
         known_image = face_recognition.load_image_file(self.im_known)
         unknown_image = face_recognition.load_image_file(self.im_not_smiling)
@@ -18,6 +21,9 @@ class Image_recog:
         results = face_recognition.compare_faces([known_encoding], unknown_encoding)
         return results[0]
 
+    '''
+    
+    '''
     def dis(self, a, b):
         return ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** .5
 
