@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load the jpg file into a numpy array
-image1 = face_recognition.load_image_file("data/smile1.jpg")
+image1 = face_recognition.load_image_file("data/eye_covered.jpg")
 image2 = face_recognition.load_image_file("data/carla_not_smile.jpg")
 # Find all facial features in all the faces in the image
 images = [image1]
@@ -73,22 +73,25 @@ def check_smiling(images):
                 'bottom_lip'
             ]
 
-            #for facial_feature in facial_features:
-                #print("The {} in this face has the following points: {
-            # }".format(facial_feature, face_landmarks[facial_feature]))
+            for facial_feature in facial_features:
+                print("The {} in this face has the following points: {}".format(facial_feature, face_landmarks[facial_feature]))
 
-            x_1 = [z[0] for z in face_landmarks["bottom_lip"]]
-            x_2 = [z[0] for z in face_landmarks["top_lip"]]
-            y_1 = [z[1] for z in face_landmarks["bottom_lip"]]
-            y_2 = [z[1] for z in face_landmarks["top_lip"]]
+            x_1 = [z[0] for z in face_landmarks["left_eye"]]
+            x_2 = [z[0] for z in face_landmarks["right_eye"]]
+            y_1 = [z[1] for z in face_landmarks["right_eye"]]
+            y_2 = [z[1] for z in face_landmarks["left_eye"]]
 
 
-            plt.plot(x_1 + x_2, y_1 + y_2)
-            plt.plot(x_1[3], y_1[3], "*", c='r')
-            plt.plot(x_2[3], y_2[3], "*", c='b')
-            plt.plot(x_1[9], y_1[9], "*",c='g')
-            plt.plot(x_2[9], y_2[9], "*", c='k')
-            plt.savefig('data/' + "tal")
+            plt.plot(x_1 , y_1 ,"*")
+            plt.plot( x_2, y_2, "*", c="r")
+
+            plt.show()
+
+            #plt.plot(x_1[3], y_1[3], "*", c='r')
+            #plt.plot(x_2[3], y_2[3], "*", c='b')
+            #plt.plot(x_1[9], y_1[9], "*",c='g')
+            #plt.plot(x_2[9], y_2[9], "*", c='k')
+            #plt.savefig('data/' + "tal")
 
             lowest = y_1[3]
             low = y_1[9]
@@ -109,11 +112,11 @@ def check_smiling(images):
 
             pil_image.show()
             i += 1
-    print(ratio)
-    if ratio > 0.30 :
-        return True
-    else:
-        return False
+    #print(ratio)
+    #if ratio > 0.30 :
+        #return True
+    #else:
+        #return False
     #if((distance_smile[0]/distance_smile[1]) > 1) :
         #return True
 #print(face_landmarks["bottom_lip"],face_landmarks["top_lip"])
