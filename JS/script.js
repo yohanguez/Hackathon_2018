@@ -40,13 +40,14 @@ function showTab(n) {
     x[n].style.display = "block";
     // ... and fix the Previous/Next buttons:
     if (n == 0) {
-        document.getElementById("prevBtn").style.display = "none";
+        // document.getElementById("prevBtn").style.display = "none";
         x[1].style.display = "none";
     } else {
-        document.getElementById("prevBtn").style.display = "inline";
+        // document.getElementById("prevBtn").style.display = "inline";
     }
     if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Submit";
+        // document.getElementById("nextBtn").innerHTML = "Submit";
+        document.getElementById("nextBtn").style.display = "none";
     } else {
         document.getElementById("nextBtn").innerHTML = "Next";
     }
