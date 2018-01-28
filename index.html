@@ -27,7 +27,6 @@
                 Community!
             </legend>
 
-
             <form action="http://localhost:5001/register_account"
                   method="POST" class="form" enctype=multipart/form-data
                   role="form" id="regForm">
@@ -92,66 +91,67 @@
                     </div>
                 </div>
 
-                <div class="tab">
-                    <!--webcam stuff-->
-                    <div>
-                        <div id="my_camera"></div>
-                        Verification:
-                        <!-- A button for taking snaps -->
-
-                        <input type=button value="Take Snapshot"
-                               onClick="take_snapshot()">
-
-
-                        <button class="btn btn-lg btn-primary btn-block"
-                                type="submit">
-                            Sign up
-                        </button>
-                    </div>
-
-                    <!-- First, include the Webcam.js JavaScript Library -->
-                    <script type="text/javascript"
-                            src="JS/webcam.min.js"></script>
-
-                    <!-- Configure a few settings and attach camera -->
-                    <script language="JavaScript">
-                        Webcam.set({
-                            width: 320,
-                            height: 240,
-                            image_format: 'jpeg',
-                            jpeg_quality: 90
-                        });
-                        Webcam.attach('#my_camera');
-                    </script>
-
-                    <!-- Code to handle taking the snapshot and displaying it locally -->
-                    <script language="JavaScript">
-                        function take_snapshot() {
-                            // take snapshot and get image data
-                            Webcam.snap(function (data_uri) {
-                                // Send data_uri to the backend.
-                                var blob = dataURItoBlob(data_uri);
-                                var fd = new FormData(document.forms.regForm);
-                                fd.append("webcam_pic_1", blob);
-                            });
-                        }
-                    </script>
-                </div>
-
-                <!--<button type="button" id="prevBtn" onclick="nextPrev(-1)">-->
-                <!--Previous-->
-                <!--</button>-->
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">
-                    Next
-
-                </button>
-
-                <!-- Circles which indicates the steps of the form: -->
-                <div style="text-align:center;margin-top:40px;">
-                    <span class="step"></span>
-                    <span class="step"></span>
-                </div>
             </form>
+
+            <div class="tab">
+                <!--webcam stuff-->
+                <div>
+                    <div id="my_camera"></div>
+                    Verification:
+                    <!-- A button for taking snaps -->
+
+                    <input type=button value="Take Snapshot"
+                           onClick="take_snapshot()">
+
+
+                    <button class="btn btn-lg btn-primary btn-block"
+                            type="submit">
+                        Sign up
+                    </button>
+                </div>
+
+                <!-- First, include the Webcam.js JavaScript Library -->
+                <script type="text/javascript"
+                        src="JS/webcam.min.js"></script>
+
+                <!-- Configure a few settings and attach camera -->
+                <script language="JavaScript">
+                    Webcam.set({
+                        width: 320,
+                        height: 240,
+                        image_format: 'jpeg',
+                        jpeg_quality: 90
+                    });
+                    Webcam.attach('#my_camera');
+                </script>
+
+                <!-- Code to handle taking the snapshot and displaying it locally -->
+                <script language="JavaScript">
+                    function take_snapshot() {
+                        // take snapshot and get image data
+                        Webcam.snap(function (data_uri) {
+                            // Send data_uri to the backend.
+                            var blob = dataURItoBlob(data_uri);
+                            var fd = new FormData(document.forms.regForm);
+                            fd.append("webcam_pic_1", blob);
+                        });
+                    }
+                </script>
+            </div>
+
+            <!--<button type="button" id="prevBtn" onclick="nextPrev(-1)">-->
+            <!--Previous-->
+            <!--</button>-->
+            <button type="button" id="nextBtn" onclick="nextPrev(1)">
+                Next
+
+            </button>
+
+            <!-- Circles which indicates the steps of the form: -->
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
         </div>
     </div>
 </div>
