@@ -53,7 +53,7 @@ JSON result:
 
 
 @app.route('/register_account', methods=['POST'])
-def upload_image():
+def upload_images():
     # Check if a valid image file was uploaded
     if request.method == 'POST':
         if 'original_pic' not in request.files:
@@ -67,17 +67,6 @@ def upload_image():
         if file and allowed_file(file.filename):
             # The image file seems valid! Detect faces and return the result.
             return detect_faces_in_image(file)
-
-    # If no valid image file was uploaded, show the file upload form:
-    return '''
-    <!doctype html>
-    <title>Is this a picture of Obama?</title>
-    <h1>Upload a picture and see if it's a picture of Obama!</h1>
-    <form method="POST" enctype="multipart/form-data">
-      <input type="file" name="file">
-      <input type="submit" value="Upload">
-    </form>
-    '''
 
 
 def detect_faces_in_image(file_stream):
