@@ -56,20 +56,23 @@ JSON result:
 def upload_images():
     # Check if a valid image file was uploaded
     if request.method == 'POST':
-        if 'original_pic' not in request.files:
+        if 'original_pic' not in request.files and 'webcam_pic' not in \
+                request.files and 'webcam_pic_smiling' not in \
+                request.files:
             return redirect(request.url)
 
-        file = request.files['original_pic']
+        original_pic = request.files['original_pic']
+        webcam_pic = request.files['webcam_pic']
+        webcam_pic_smiling = request.files['webcam_pic_smiling']
 
-        if file.filename == '':
+        if original_pic.filename == '' or webcam_pic.filename == '' or webcam_pic_smiling.filename == '':
             return redirect(request.url)
 
-        if file and allowed_file(file.filename):
-            # The image file seems valid! Detect faces and return the result.
-            return detect_faces_in_image(file)
+        # The image file seems valid! Detect faces and return the result.
+        return verify_identity(original_pic, webcam_pic, webcam_pic_smiling)
 
 
-def detect_faces_in_image(file_stream):
+def verify_identity(original_pic, webcam_pic, webcam_pic_smiling):
     # Pre-calculated face encoding of Obama generated with face_recognition.face_encodings(img)
     known_face_encoding = [-0.09634063, 0.12095481, -0.00436332, -0.07643753,
                            0.0080383,
@@ -124,7 +127,7 @@ def detect_faces_in_image(file_stream):
                            0.07417042, 0.07126575, 0.00209804]
 
     # Load the uploaded image file
-    img = face_recognition.load_image_file(file_stream)
+    img = face_recognition.load_image_file(original_pic)
     # Get face encodings for any faces in the uploaded image
     unknown_face_encodings = face_recognition.face_encodings(img)
 
