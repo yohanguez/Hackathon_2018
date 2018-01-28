@@ -15,6 +15,25 @@ function previewFile() {
         reader.readAsDataURL(file);
     }
 }
+//Configure a few settings and attach camera
+Webcam.set({
+    width: 320,
+    height: 240,
+    image_format: 'jpeg',
+    jpeg_quality: 90
+});
+Webcam.attach('#my_camera');
+
+//Code to handle taking the snapshot and displaying it locally
+function take_snapshot() {
+    // take snapshot and get image data
+    Webcam.snap(function (data_uri) {
+        // Send data_uri to the backend.
+        var blob = dataURItoBlob(data_uri);
+        var fd = new FormData(document.forms.regForm);
+        fd.append("webcam_pic_1", blob);
+    });
+}
 
 function nextPrev(n) {
     // This function will figure out which tab to display
@@ -82,5 +101,5 @@ function dataURItoBlob(dataURI) {
         ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type: mimeString});
+    return new Blob([ia], { type: mimeString });
 }
