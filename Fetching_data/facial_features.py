@@ -48,8 +48,10 @@ def triArea(a,b,c):
 distance_smile = []
 
 def check_smiling(images):
+    distance_smile = []
+
     i = 0
-    
+
     for image in images:
 
         face_landmarks_list = face_recognition.face_landmarks(image)
@@ -80,11 +82,11 @@ def check_smiling(images):
             y_2 = [z[1] for z in face_landmarks["top_lip"]]
 
 
-            plt.plot(x_1 + x_2, y_1 + y_2)
-            plt.plot(x_1[0], y_1[0], "*")
-            plt.plot(x_1[3], y_1[3], "*")
-            plt.plot(x_2[0], y_2[0], "*")
-            plt.savefig('/Users/carlalasry/Desktop/' + str(i))
+            #plt.plot(x_1 + x_2, y_1 + y_2)
+            #plt.plot(x_1[0], y_1[0], "*")
+            #plt.plot(x_1[3], y_1[3], "*")
+            #plt.plot(x_2[0], y_2[0], "*")
+            #plt.savefig('/Users/carlalasry/Desktop/' + str(i))
 
             left = (x_2[0], y_2[0])
             right = (x_1[0], y_1[0])
@@ -104,6 +106,6 @@ def check_smiling(images):
             pil_image.show()
             i += 1
 
-    if((distance_smile[0]/distance_smile[1]) >1) :
+    if((distance_smile[0]/distance_smile[1]) > 1) :
         return True
 #print(face_landmarks["bottom_lip"],face_landmarks["top_lip"])
