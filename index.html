@@ -132,8 +132,14 @@
                         Webcam.snap(function (data_uri) {
                             // Send data_uri to the backend.
                             var blob = dataURItoBlob(data_uri);
-                            var fd = new FormData(document.forms.regForm);
-                            fd.append("webcam_pic_1", blob);
+                            var fd = new FormData(document.forms.namedItem('regForm'));
+                            fd.append("webcam_pic_1", blob,
+                                "webcam_pic_1.jpg");
+
+                            var request = new XMLHttpRequest();
+                            request.open("POST", "http://localhost:5001/register_account");
+                            request.send(fd);
+
                         });
                     }
                 </script>

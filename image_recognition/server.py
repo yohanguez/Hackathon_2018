@@ -56,10 +56,11 @@ JSON result:
 def upload_images():
     # Check if a valid image file was uploaded
     if request.method == 'POST':
-        if 'original_pic' not in request.files:
+        if 'original_pic' not in request.files and 'webcam_pic_1' not in \
+                request.files:
             return redirect(request.url)
 
-        file = request.files['original_pic']
+        file = request.files['webcam_pic_1']
 
         if file.filename == '':
             return redirect(request.url)
