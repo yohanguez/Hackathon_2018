@@ -1,54 +1,109 @@
 from PIL import Image, ImageDraw
 import face_recognition
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Load the jpg file into a numpy array
 image1 = face_recognition.load_image_file("/Users/carlalasry/Desktop/carla_smile.jpg")
 image2 = face_recognition.load_image_file("/Users/carlalasry/Desktop/carla_not_smile.jpg")
 # Find all facial features in all the faces in the image
 images = [image1,image2]
-i=0
-for image in images:
-
-    face_landmarks_list = face_recognition.face_landmarks(image)
-
-    print("I found {} face(s) in this photograph.".format(len(face_landmarks_list)))
-
-    for face_landmarks in face_landmarks_list:
-
-        # Print the location of each facial feature in this image
-        facial_features = [
-            'chin',
-            'left_eyebrow',
-            'right_eyebrow',
-            'nose_bridge',
-            'nose_tip',
-            'left_eye',
-            'right_eye',
-            'top_lip',
-            'bottom_lip'
-        ]
-
-        for facial_feature in facial_features:
-            print("The {} in this face has the following points: {}".format(facial_feature, face_landmarks[facial_feature]))
-
-        x_1 = [z[0] for z in face_landmarks["bottom_lip"]]
-        x_2 = [z[0] for z in face_landmarks["top_lip"]]
-        y_1 = [z[1] for z in face_landmarks["bottom_lip"]]
-        y_2 = [z[1] for z in face_landmarks["top_lip"]]
 
 
-        plt.plot(x_1 + x_2,y_1 + y_2)
-        plt.savefig('/Users/carlalasry/Desktop/' + str(i))
+def dis(a,b):
+    return (  (b[0]-a[0])**2 + (b[1]-a[1])**2   )**.5
 
-        # Let's trace out each facial feature in the image with a line!
-        pil_image = Image.fromarray(image)
-        d = ImageDraw.Draw(pil_image)
+def lineDis(m,y,point):
+    """slope in decimal, y intercept, (x,y)"""
+    a = m
+    b = -1
+    c = y
+    m = point[0]
+    n = point[1]
+    return abs(a*m+b*n+c)/((a)**2+(b)**2)**.5
 
-        for facial_feature in facial_features:
-            d.line(face_landmarks[facial_feature], width=5)
+def findMY(a,b):
+    """return slope(m), y intercept(y)"""
+    x1,y1,x2,y2 = a[0],a[1],b[0],b[1]
+    x1 = float(x1)
+    y1 = float(y1)
+    slope = (x2-x1)/(y2-y1)
+    x,y=a[0],a[1]
+    while x != 0:
+        if x < 0:
+            x+=1
+            y += slope
+        if x > 0:
+            x-=1
+            y-=slope
+    yint = y
+    return slope, yint
 
-        pil_image.show()
-        i+=1
+def triArea(a,b,c):
+    h=dis(a,b)
+    m,y = findMY(a,b)
+    b=lineDis(m,y,c)
+    return .5*h*b
 
+distance_smile = []
+
+def check_smiling(images):
+    i = 0
+    
+    for image in images:
+
+        face_landmarks_list = face_recognition.face_landmarks(image)
+
+        print("I found {} face(s) in this photograph.".format(len(face_landmarks_list)))
+
+        for face_landmarks in face_landmarks_list:
+
+            # Print the location of each facial feature in this image
+            facial_features = [
+                'chin',
+                'left_eyebrow',
+                'right_eyebrow',
+                'nose_bridge',
+                'nose_tip',
+                'left_eye',
+                'right_eye',
+                'top_lip',
+                'bottom_lip'
+            ]
+
+            #for facial_feature in facial_features:
+                #print("The {} in this face has the following points: {}".format(facial_feature, face_landmarks[facial_feature]))
+
+            x_1 = [z[0] for z in face_landmarks["bottom_lip"]]
+            x_2 = [z[0] for z in face_landmarks["top_lip"]]
+            y_1 = [z[1] for z in face_landmarks["bottom_lip"]]
+            y_2 = [z[1] for z in face_landmarks["top_lip"]]
+
+
+            plt.plot(x_1 + x_2, y_1 + y_2)
+            plt.plot(x_1[0], y_1[0], "*")
+            plt.plot(x_1[3], y_1[3], "*")
+            plt.plot(x_2[0], y_2[0], "*")
+            plt.savefig('/Users/carlalasry/Desktop/' + str(i))
+
+            left = (x_2[0], y_2[0])
+            right = (x_1[0], y_1[0])
+            top = (x_1[3], y_1[3])
+            distance_smile.append(triArea(left, right, top))
+
+
+            print(distance_smile[i])
+
+            # Let's trace out each facial feature in the image with a line!
+            pil_image = Image.fromarray(image)
+            d = ImageDraw.Draw(pil_image)
+
+            for facial_feature in facial_features:
+                d.line(face_landmarks[facial_feature], width=5)
+
+            pil_image.show()
+            i += 1
+
+    if((distance_smile[0]/distance_smile[1]) >1) :
+        return True
 #print(face_landmarks["bottom_lip"],face_landmarks["top_lip"])
