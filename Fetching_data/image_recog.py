@@ -1,17 +1,27 @@
+"""
+Hold the functionality of Image Recognition and Verification
+"""
+
 import face_recognition
+
 from PIL import Image, ImageDraw
 
+
 class Image_recog:
-    """Checks similarity between two images"""
+    """ Holds the functionality of testing similarity between two images """
+
     def __init__(self, im1, im_smiling, im_not_smiling):
         self.im_known = im1
         self.im_smiling = im_smiling
         self.im_not_smiling = im_not_smiling
-    '''
-    Return true if self.im_known and im_not_smiling are the same person (or 
-    false if they are not)
-    '''
-    def check_similarity(self):
+
+    def is_similar(self):
+        """
+        Checks if two images are similar - the same person
+
+        Returns:
+             bool. True for the same person False otherwise
+        """
         known_image = face_recognition.load_image_file(self.im_known)
         unknown_image = face_recognition.load_image_file(self.im_not_smiling)
 
@@ -21,14 +31,32 @@ class Image_recog:
         results = face_recognition.compare_faces([known_encoding], unknown_encoding)
         return results[0]
 
-    '''
-    
-    '''
-    def dis(self, a, b):
+    def calc_distance(self, a, b):
+        """
+        Calculates the distance between two points
+
+        Args:
+            a(tuple): first point (x,y)
+            b(tuple): second point (x,y)
+
+        Returns:
+            (float): The distance between two points
+        """
         return ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** .5
 
-    def lineDis(self,m, y, point):
-        """slope in decimal, y intercept, (x,y)"""
+    def calc_distance_from_line(self, m, y, point):
+        """
+        Calculate the distance of a point from a line
+
+        Args:
+            m(float): the slop of the line
+            y(float): the intercept of the line
+            point(tuple): the given point (x,y)
+
+        Returns:
+
+        slope in decimal, y intercept, (x,y)
+        """
         a = m
         b = -1
         c = y
@@ -36,8 +64,18 @@ class Image_recog:
         n = point[1]
         return abs(a * m + b * n + c) / ((a) ** 2 + (b) ** 2) ** .5
 
-    def findMY(self, a, b):
-        """return slope(m), y intercept(y)"""
+    def calc_slop_intercept(self, a, b):
+        """
+        Calculates the slop and intercept between two points
+
+        Args:
+            a(tuple): 1st point (x,y)
+            b(tuple): 2nd point (x,y)
+
+        Return
+            float. slope(m),
+            float. y intercept(y)
+        """
         x1, y1, x2, y2 = a[0], a[1], b[0], b[1]
         x1 = float(x1)
         y1 = float(y1)
@@ -53,24 +91,40 @@ class Image_recog:
         yint = y
         return slope, yint
 
-    def triArea(self,a, b, c):
-        h = self.dis(a, b)
-        m, y = self.findMY(a, b)
-        b = self.lineDis(m, y, c)
+    def calc_triangle_area(self,a, b, c):
+        """
+        Calculate triangle area given 3 points
+
+        Args:
+            a(tuple): 1st point (x,y)
+            b(tuple): 2nd point (x,y)
+            c(tuple): 3rd point (x,y)
+
+        Returns:
+             float. triangle area
+        """
+        h = self.calc_distance(a, b)
+        m, y = self.calc_slop_intercept(a, b)
+        b = self.calc_distance_from_line(m, y, c)
         return .5 * h * b
 
+    def is_smiling(self):
+        """
+        Compares two picture and check if a person is smiling or not
 
-    def check_is_smiling(self):
+        Returns:
+            bool. : True if smiling, False otherwise
+        """
+        # Retrive images:
         image1 = face_recognition.load_image_file(self.im_smiling)
         image2 = face_recognition.load_image_file(self.im_not_smiling)
         distance_smile = []
+
         i = 0
         images = [image1, image2]
         for image in images:
 
             face_landmarks_list = face_recognition.face_landmarks(image)
-
-            #print("I found {} face(s) in this photograph.".format(len(face_landmarks_list)))
 
             for face_landmarks in face_landmarks_list:
 
@@ -87,21 +141,15 @@ class Image_recog:
                     'bottom_lip'
                 ]
 
-                # for facial_feature in facial_features:
-                # print("The {} in this face has the following points: {}".format(facial_feature, face_landmarks[facial_feature]))
-
                 x_1 = [z[0] for z in face_landmarks["bottom_lip"]]
                 x_2 = [z[0] for z in face_landmarks["top_lip"]]
                 y_1 = [z[1] for z in face_landmarks["bottom_lip"]]
                 y_2 = [z[1] for z in face_landmarks["top_lip"]]
 
-
                 left = (x_2[0], y_2[0])
                 right = (x_1[0], y_1[0])
                 top = (x_1[3], y_1[3])
-                distance_smile.append(self.triArea(left, right, top))
-
-                #print(distance_smile[i])
+                distance_smile.append(self.calc_triangle_area(left, right, top))
 
                 # Let's trace out each facial feature in the image with a line!
                 pil_image = Image.fromarray(image)
@@ -110,13 +158,16 @@ class Image_recog:
                 for facial_feature in facial_features:
                     d.line(face_landmarks[facial_feature], width=5)
 
-                #pil_image.show()
                 i += 1
 
-        if ((distance_smile[0] / distance_smile[1]) > 1):
+        # Smiling if the ration of lips triangle is larger than 1:
+        if (distance_smile[0] / distance_smile[1]) > 1:
             return True
         else:
             return False
 
 
+test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png", "/Users/carlalasry/Downloads/arthur.jpg", "/Users/carlalasry/Desktop/carla_smile.jpg", "/Users/carlalasry/Desktop/carla_not_smile.jpg")
+print(test_reco.is_similar())
+print(test_reco.is_smiling())
 
