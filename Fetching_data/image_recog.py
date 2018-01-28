@@ -3,7 +3,7 @@ Hold the functionality of Image Recognition and Verification
 """
 
 import face_recognition
-
+import numpy as np
 from PIL import Image, ImageDraw
 
 
@@ -108,6 +108,68 @@ class Image_recog:
         b = self.calc_distance_from_line(m, y, c)
         return .5 * h * b
 
+
+    def is_smiling_ratio(self):
+        image = face_recognition.load_image_file(self.im_smiling)
+        face_landmarks_list = face_recognition.face_landmarks(image)
+
+        #print("I found {} face(s) in this photograph.".format(
+            #len(face_landmarks_list)))
+
+        for face_landmarks in face_landmarks_list:
+
+            # Print the location of each facial feature in this image
+            facial_features = [
+                'chin',
+                'left_eyebrow',
+                'right_eyebrow',
+                'nose_bridge',
+                'nose_tip',
+                'left_eye',
+                'right_eye',
+                'top_lip',
+                'bottom_lip'
+            ]
+
+            # for facial_feature in facial_features:
+            # print("The {} in this face has the following points: {
+            # }".format(facial_feature, face_landmarks[facial_feature]))
+
+            x_1 = [z[0] for z in face_landmarks["bottom_lip"]]
+            x_2 = [z[0] for z in face_landmarks["top_lip"]]
+            y_1 = [z[1] for z in face_landmarks["bottom_lip"]]
+            y_2 = [z[1] for z in face_landmarks["top_lip"]]
+
+            """plt.plot(x_1 + x_2, y_1 + y_2)
+            plt.plot(x_1[3], y_1[3], "*", c='r')
+            plt.plot(x_2[3], y_2[3], "*", c='b')
+            plt.plot(x_1[9], y_1[9], "*", c='g')
+            plt.plot(x_2[9], y_2[9], "*", c='k')
+            plt.savefig('data/' + "tal")"""
+
+            lowest = y_1[3]
+            low = y_1[9]
+            uppest = y_2[3]
+            up = y_2[9]
+            # distance_smile.append(triArea(left, right, top))
+            ratio = np.abs((low - up) / (lowest - uppest))
+
+            # print(distance_smile[i])
+
+            # Let's trace out each facial feature in the image with a line!
+            pil_image = Image.fromarray(image)
+            d = ImageDraw.Draw(pil_image)
+
+            for facial_feature in facial_features:
+                d.line(face_landmarks[facial_feature], width=5)
+
+            #pil_image.show()
+
+        if ratio > 0.30:
+            return True
+        else:
+            return False
+
     def is_smiling(self):
         """
         Compares two picture and check if a person is smiling or not
@@ -167,7 +229,9 @@ class Image_recog:
             return False
 
 
-test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png", "/Users/carlalasry/Downloads/arthur.jpg", "/Users/carlalasry/Desktop/carla_smile.jpg", "/Users/carlalasry/Desktop/carla_not_smile.jpg")
-print(test_reco.is_similar())
-print(test_reco.is_smiling())
+#test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png",
+ #"/Users/carlalasry/Desktop/carla_smile.jpg",
+        # "/Users/carlalasry/Desktop/carla_not_smile.jpg")
+#print(test_reco.is_similar())
+#print(test_reco.is_smiling())
 
