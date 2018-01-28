@@ -16,6 +16,32 @@ function previewFile() {
     }
 }
 
+//Configure a few settings and attach camera
+Webcam.set({
+    width: 320,
+    height: 240,
+    image_format: 'jpeg',
+    jpeg_quality: 90
+});
+Webcam.attach('#my_camera');
+
+//Code to handle taking the snapshot and displaying it locally
+function take_snapshot() {
+    // take snapshot and get image data
+    Webcam.snap(function (data_uri) {
+        // Send data_uri to the backend.
+        var blob = dataURItoBlob(data_uri);
+        var fd = new FormData(document.forms.namedItem('regForm'));
+        fd.append("webcam_pic_1", blob,
+            "webcam_pic_1.jpg");
+
+        var request = new XMLHttpRequest();
+        request.open("POST", "http://localhost:5001/register_account");
+        request.send(fd);
+
+    });
+}
+
 function nextPrev(n) {
     // This function will figure out which tab to display
     var x = document.getElementsByClassName("tab");
@@ -84,24 +110,3 @@ function dataURItoBlob(dataURI) {
 
     return new Blob([ia], {type: mimeString});
 }
-
-// Create the XHR object.
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-    if ("withCredentials" in xhr) {
-        // XHR for Chrome/Firefox/Opera/Safari.
-        xhr.open(method, url, true);
-    } else if (typeof XDomainRequest != "undefined") {
-        // XDomainRequest for IE.
-        xhr = new XDomainRequest();
-        xhr.open(method, url);
-    } else {
-        // CORS not supported.
-        xhr = null;
-    }
-    return xhr;
-}
-
-document.getElementById("regForm").addEventListener("click", function(event){
-    event.preventDefault()
-});
