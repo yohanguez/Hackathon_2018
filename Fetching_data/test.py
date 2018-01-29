@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load the jpg file into a numpy array
-image1 = face_recognition.load_image_file("data/half_closed.jpg")
-image2 = face_recognition.load_image_file("data/smile1.jpg")
+image1 = face_recognition.load_image_file("data/closed_eyes.jpg")
+image2 = face_recognition.load_image_file("data/closed_eyes.jpg")
 # Find all facial features in all the faces in the image
 images = [image1]
 
@@ -78,14 +78,17 @@ def check_smiling(images):
 
             x_1 = [z[0] for z in face_landmarks["left_eye"]]
             x_2 = [z[0] for z in face_landmarks["right_eye"]]
-            y_1 = [z[1] for z in face_landmarks["right_eye"]]
-            y_2 = [z[1] for z in face_landmarks["left_eye"]]
+            y_1 = [z[1] for z in face_landmarks["left_eye"]]
+            y_2 = [z[1] for z in face_landmarks["right_eye"]]
 
+            x_1_1 = [z[0] for z in face_landmarks["left_eyebrow"]]
+            x_1_2 = [z[1] for z in face_landmarks["left_eyebrow"]]
 
-            #plt.plot(x_1 , y_1 ,"*")
-            #plt.plot( x_2, y_2, "*", c="r")
+            plt.plot(x_1 , y_1 )
+            plt.plot( x_2, y_2, c="r")
+            #plt.plot(x_1_1, x_1_2, c='b')
 
-            #plt.show()
+            plt.show()
 
             #plt.plot(x_1[3], y_1[3], "*", c='r')
             #plt.plot(x_2[3], y_2[3], "*", c='b')
@@ -93,12 +96,12 @@ def check_smiling(images):
             #plt.plot(x_2[9], y_2[9], "*", c='k')
             #plt.savefig('data/' + "tal")
 
-            lowest = y_1[3]
-            low = y_1[9]
-            uppest = y_2[3]
-            up = y_2[9]
+            #lowest = y_1[3]
+            #low = y_1[9]
+            #uppest = y_2[3]
+            #up = y_2[9]
             #distance_smile.append(triArea(left, right, top))
-            ratio = np.abs((low - up) / (lowest -uppest))
+            #ratio = np.abs((low - up) / (lowest -uppest))
 
 
             #print(distance_smile[i])
