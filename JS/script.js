@@ -84,9 +84,11 @@ function take_smiling_snapshot() {
             else {
                 $('#successSpan').text("failed. Please retry.");
             }
-            $('#myTab a:last').tab('show');
+            $("body").removeClass("loading");
+            // $('#myTab a:last').tab('show');
         };
         request.send(fd);
+        $("body").addClass("loading");
     });
     // Show please wait
 }
