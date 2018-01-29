@@ -17,14 +17,16 @@ function previewFile() {
     }
 }
 
-//Configure a few settings and attach camera
-Webcam.set({
-    width: 320,
-    height: 240,
-    image_format: 'jpeg',
-    jpeg_quality: 90
-});
-Webcam.attach('#my_camera');
+//Configure a few settings and attach camera - need to set this up to only be called when on second page
+function startCamera() {
+    Webcam.set({
+        width: 320,
+        height: 240,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#my_camera');
+}
 
 //Code to handle taking the snapshot and displaying it locally
 function take_snapshot() {
@@ -77,13 +79,9 @@ function showTab(n) {
     x[n].style.display = "block";
     // ... and fix the Previous/Next buttons:
     if (n == 0) {
-        // document.getElementById("prevBtn").style.display = "none";
         x[1].style.display = "none";
-    } else {
-        // document.getElementById("prevBtn").style.display = "inline";
-    }
+    } 
     if (n == (x.length - 1)) {
-        // document.getElementById("nextBtn").innerHTML = "Submit";
         document.getElementById("nextBtn").style.display = "none";
     } else {
         document.getElementById("nextBtn").innerHTML = "Next";
@@ -119,5 +117,5 @@ function dataURItoBlob(dataURI) {
         ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type: mimeString});
+    return new Blob([ia], { type: mimeString });
 }
