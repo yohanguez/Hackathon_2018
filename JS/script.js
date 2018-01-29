@@ -46,9 +46,16 @@ function take_smiling_snapshot() {
             "webcam_pic_smiling.jpg");
 
         var request = new XMLHttpRequest();
+        request.responseType = 'json';
         request.open("POST", "http://localhost:5001/register_account");
-        request.send(fd);
 
+        request.onload = function () {
+            var jsonResponse = request.response;
+            console.log(jsonResponse);
+            var is_similar = jsonResponse.is_similar;
+            var is_smiling_ratio = jsonResponse.is_smiling_ratio;
+        };
+        request.send(fd);
     });
 }
 

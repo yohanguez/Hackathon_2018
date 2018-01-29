@@ -71,15 +71,14 @@ def upload_images():
 
 
 def verify_identity(original_pic, webcam_pic, webcam_pic_smiling):
-    # Pre-calculated face encoding of Obama generated with face_recognition.face_encodings(img)
     my_imagerecog = Image_recog(original_pic, webcam_pic_smiling, webcam_pic)
 
     # Load the uploaded image file
 
     # Return the result as json
     result = {
-        "is_similar": my_imagerecog.is_similar(),
-        "is_smiling_ratio": my_imagerecog.is_smiling_ratio(),
+        "is_similar": bool(my_imagerecog.is_similar()),
+        "is_smiling_ratio": bool(my_imagerecog.is_smiling_ratio()),
     }
     return jsonify(result)
 
