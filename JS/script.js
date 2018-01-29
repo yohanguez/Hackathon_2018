@@ -54,9 +54,17 @@ function take_smiling_snapshot() {
             console.log(jsonResponse);
             var is_similar = jsonResponse.is_similar;
             var is_smiling_ratio = jsonResponse.is_smiling_ratio;
+
+            if (is_similar && is_smiling_ratio) {
+                // Hide please wait
+                // 2. Javascript go to 3rd tab
+                // 3. Display is_similar and is_smiling_ratio as checkbox
+                // icons.
+            }
         };
         request.send(fd);
     });
+    // Show please wait
 }
 
 function dataURItoBlob(dataURI) {
