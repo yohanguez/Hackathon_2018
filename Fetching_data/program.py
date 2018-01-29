@@ -1,4 +1,4 @@
-import image_recog
+from image_recognition import image_recog
 
 test_reco = image_recog.Image_recog("data/half_closed.jpg",
                                     "data/arthur.jpg",
