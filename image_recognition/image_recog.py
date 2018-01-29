@@ -170,6 +170,23 @@ class Image_recog:
         else:
             return False
 
+
+    def is_similar_smiling(self):
+        """
+        Checks if two images are similar - the same person
+
+        Returns:
+             bool. True for the same person False otherwise
+        """
+        known_image = face_recognition.load_image_file(self.im_known)
+        unknown_image = face_recognition.load_image_file(self.im_smiling)
+
+        known_encoding = face_recognition.face_encodings(known_image)[0]
+        unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+
+        results = face_recognition.compare_faces([known_encoding], unknown_encoding)
+        return results[0]
+
     def is_smiling(self):
         """
         Compares two picture and check if a person is smiling or not
@@ -181,6 +198,9 @@ class Image_recog:
         image1 = face_recognition.load_image_file(self.im_smiling)
         image2 = face_recognition.load_image_file(self.im_not_smiling)
         distance_smile = []
+
+        if self.is_similar_smiling() == False:
+            return False
 
         i = 0
         images = [image1, image2]
