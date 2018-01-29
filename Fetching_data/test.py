@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load the jpg file into a numpy array
-image1 = face_recognition.load_image_file("data/eye_covered.jpg")
-image2 = face_recognition.load_image_file("data/carla_not_smile.jpg")
+image1 = face_recognition.load_image_file("data/half_closed.jpg")
+image2 = face_recognition.load_image_file("data/smile1.jpg")
 # Find all facial features in all the faces in the image
 images = [image1]
 
@@ -82,10 +82,10 @@ def check_smiling(images):
             y_2 = [z[1] for z in face_landmarks["left_eye"]]
 
 
-            plt.plot(x_1 , y_1 ,"*")
-            plt.plot( x_2, y_2, "*", c="r")
+            #plt.plot(x_1 , y_1 ,"*")
+            #plt.plot( x_2, y_2, "*", c="r")
 
-            plt.show()
+            #plt.show()
 
             #plt.plot(x_1[3], y_1[3], "*", c='r')
             #plt.plot(x_2[3], y_2[3], "*", c='b')
