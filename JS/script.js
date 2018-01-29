@@ -56,12 +56,13 @@ function take_smiling_snapshot() {
             var is_smiling_ratio = jsonResponse.is_smiling_ratio;
 
             if (is_similar && is_smiling_ratio) {
+                    $("body").addClass("loading");
+            }
                 // Hide please wait
                 // 2. Javascript go to 3rd tab
                 // 3. Display is_similar and is_smiling_ratio as checkbox
                 // icons.
             }
-        };
         request.send(fd);
     });
     // Show please wait
