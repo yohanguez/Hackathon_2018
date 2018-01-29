@@ -4,126 +4,164 @@
 <head>
     <title>HACKATHON 2018</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
 </head>
 
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
-            <legend>
-                <i class="glyphicon glyphicon-globe"></i> Sign Up and Join Our
-                Community!
-            </legend>
+    <section style="background:#efefe9;">
+        <div class="container">
+            <div class="row">
+                <div class="board">
+                    <div class="board-inner">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <div class="liner"></div>
+                            <li class="active">
+                                <a href="#home" data-toggle="tab" title="welcome">
+                                    <span class="round-tabs one">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                    </span>
+                                </a>
+                            </li>
 
-            <form action="http://localhost:5001/register_account" method="POST"
-                  class="form" enctype=multipart/form-data role="form"
-                  id="regForm">
+                            <li>
+                                <a href="#profile" data-toggle="tab" title="profile">
+                                    <span class="round-tabs two">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                </a>
+                            </li>
 
-                <div class="tab">
-                    <div class="row">
-                        <div class="col-xs-6 col-md-6">
-                            <input class="form-control" name="firstname"
-                                   placeholder="First Name" type="text"
-                                   required autofocus/>
-                        </div>
-                        <div class="col-xs-6 col-md-6">
-                            <input class="form-control" name="lastname"
-                                   placeholder="Last Name" type="text"
-                                   required/>
-                        </div>
+                            <li>
+                                <a href="#doner" data-toggle="tab" title="completed">
+                                    <span class="round-tabs five">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                        </ul>
                     </div>
-                    <input class="form-control" name="youremail"
-                           placeholder="Your Email" type="email"/>
-                    <input class="form-control" name="password"
-                           placeholder="New Password" type="password"/>
-                    <label>
-                        Birth Date</label>
-                    <div class="row">
-                        <div class="col-xs-8 col-md-8">
-                            <input class="form-control" name="date"
-                                   placeholder="DD/MM/YYYY" type="date"
-                                   required>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="home">
+
+                            <form action="http://localhost:5001/register_account" method="POST" class="form" enctype=multipart/form-data role="form"
+                                id="regForm">
+
+                                <div class="tab">
+                                    <div class="row">
+                                        <div class="col-xs-4 col-md-4">
+                                            <input class="form-control" name="firstname" placeholder="First Name" type="text" required autofocus/>
+                                        </div>
+                                        <div class="col-xs-4 col-md-4">
+                                            <input class="form-control" name="lastname" placeholder="Last Name" type="text" required/>
+                                        </div>
+                                    </div>
+                                    <input class="form-control" name="youremail" placeholder="Your Email" type="email" />
+                                    <input class="form-control" name="password" placeholder="New Password" type="password" />
+                                    <label>
+                                        Birth Date</label>
+                                    <div class="row">
+                                        <div class="col-xs-8 col-md-8">
+                                            <input class="form-control" name="date" placeholder="DD/MM/YYYY" type="date" required>
+                                        </div>
+                                    </div>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="sex" id="inlineCheckbox1" value="male" /> Male
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="sex" id="inlineCheckbox2" value="female" /> Female
+                                    </label>
+                                    <br/>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-4">
+                                            <input type="file" name="original_pic" onchange="previewFile()">
+                                            <br>
+                                            <img src="" height="200">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <p class="text-center">
+                                <a href="" class="btn btn-success btn-outline-rounded green" id="nextBtn" onclick="nextPrev(1)">NEXT
+                                    <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span>
+                                </a>
+                            </p>
                         </div>
-                    </div>
-                    <label class="radio-inline">
-                        <input type="radio" name="sex" id="inlineCheckbox1"
-                               value="male"/> Male
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="sex" id="inlineCheckbox2"
-                               value="female"/> Female
-                    </label>
-                    <br/>
-                    <br/>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-4">
-                            <input type="file" name="original_pic"
-                                   onchange="previewFile()">
-                            <br>
-                            <img src="" height="200">
+
+                        <div class="tab-pane fade" id="profile">
+                            <div id="my_camera"></div>
+                            Verification:
+                            <!-- A button for taking snaps -->
+
+                            <input type=button value="Regular Picture" onClick="take_snapshot()">
+
+                            <input type=button value="Smiling Picture" onClick="take_smiling_snapshot()">
+
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                Sign up
+                            </button>
                         </div>
+                        <div class="tab-pane fade" id="messages">
+                            <h3 class="head text-center">Bootsnipp goodies</h3>
+                            <p class="narrow text-center">
+                                Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an
+                                vim.
+                            </p>
+
+                            <p class="text-center">
+                                <a href="" class="btn btn-success btn-outline-rounded green"> start using bootsnipp
+                                    <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="settings">
+                            <h3 class="head text-center">Drop comments!</h3>
+                            <p class="narrow text-center">
+                                Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an
+                                vim.
+                            </p>
+
+                            <p class="text-center">
+                                <a href="" class="btn btn-success btn-outline-rounded green"> start using bootsnipp
+                                    <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="doner">
+                            <div class="text-center">
+                                <i class="img-intro icon-checkmark-circle"></i>
+                            </div>
+                            <h3 class="head text-center">thanks for staying tuned!
+                                <span style="color:#f48260;">♥</span> Bootstrap</h3>
+                            <p class="narrow text-center">
+                                Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an
+                                vim.
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
+
                 </div>
-
-            </form>
-
-            <div class="tab">
-                <!--webcam stuff-->
-                <div>
-                    <div id="my_camera"></div>
-                    Verification:
-                    <!-- A button for taking snaps -->
-
-                    <input type=button value="Regular Picture"
-                           onClick="take_snapshot()">
-
-                    <input type=button value="Smiling Picture"
-                           onClick="take_smiling_snapshot()">
-
-                    <button class="btn btn-lg btn-primary btn-block"
-                            type="submit">
-                        Sign up
-                    </button>
-                </div>
-
-            </div>
-
-            <!--<button type="button" id="prevBtn" onclick="nextPrev(-1)">-->
-            <!--Previous-->
-            <!--</button>-->
-            <button type="button" id="nextBtn" onclick="nextPrev(1)">
-                Next
-
-            </button>
-
-            <!-- Circles which indicates the steps of the form: -->
-            <div style="text-align:center;margin-top:40px;">
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
             </div>
         </div>
-    </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    </section>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="JS/webcam.min.js"></script>
-<script src="./JS/script.js"></script>
+    <script type="text/javascript" src="./JS/webcam.min.js"></script>
+    <script src="./JS/script.js"></script>
 </body>
 
 </html>
