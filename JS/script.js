@@ -55,12 +55,36 @@ function take_smiling_snapshot() {
             var is_similar = jsonResponse.is_similar;
             var is_smiling_ratio = jsonResponse.is_smiling_ratio;
 
-            if (is_similar && is_smiling_ratio) {
-                // Hide please wait
-                // 2. Javascript go to 3rd tab
-                // 3. Display is_similar and is_smiling_ratio as checkbox
-                // icons.
+            const GLYPHICON_OK_CLASSES = "glyphicon\n" +
+                    "                              glyphicon-ok";
+            const GLYPHICON_REMOVE_CLASSES = "glyphicon\n" +
+                    "                              glyphicon-remove";
+
+            $('#compareSpan').removeClass();
+            $('#smilingSpan').removeClass();
+
+            if (is_similar) {
+                $('#compareSpan').addClass(GLYPHICON_OK_CLASSES);
             }
+            else {
+                $('#compareSpan').addClass(GLYPHICON_REMOVE_CLASSES);
+
+            }
+
+            if (is_smiling_ratio) {
+                $('#smilingSpan').addClass(GLYPHICON_OK_CLASSES);
+            }
+            else {
+                $('#smilingSpan').addClass(GLYPHICON_REMOVE_CLASSES);
+            }
+
+            if (is_similar && is_smiling_ratio) {
+                $('#successSpan').text("succeeded. Welcome !!");
+            }
+            else {
+                $('#successSpan').text("failed. Please retry.");
+            }
+            $('#myTab a:last').tab('show');
         };
         request.send(fd);
     });
