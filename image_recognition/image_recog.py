@@ -116,6 +116,9 @@ class Image_recog:
         #print("I found {} face(s) in this photograph.".format(
             #len(face_landmarks_list)))
 
+        if not self.is_similar_smiling():
+            return False
+
         for face_landmarks in face_landmarks_list:
 
             # Print the location of each facial feature in this image
@@ -199,7 +202,8 @@ class Image_recog:
         image2 = face_recognition.load_image_file(self.im_not_smiling)
         distance_smile = []
 
-        if self.is_similar_smiling() == False:
+        print(self.is_similar_smiling())
+        if not self.is_similar_smiling():
             return False
 
         i = 0
@@ -244,9 +248,9 @@ class Image_recog:
 
         # Smiling if the ration of lips triangle is larger than 1:
         if (distance_smile[0] / distance_smile[1]) > 1:
-            return True
+            return (True and self.is_similar_smiling())
         else:
-            return False
+            return (False and self.is_similar_smiling())
 
 
 #test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png",
