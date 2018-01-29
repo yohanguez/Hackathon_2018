@@ -69,11 +69,11 @@ function dataURItoBlob(dataURI) {
         ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], { type: mimeString });
+    return new Blob([ia], {type: mimeString});
 }
-startCamera()
 
-$(function(){
+startCamera();
+
+$(function () {
     $('a[title]').tooltip();
-    });
-    
+});

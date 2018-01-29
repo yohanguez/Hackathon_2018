@@ -15,7 +15,6 @@
 
 # NOTE: This example requires flask to be installed! You can install it with pip:
 from image_recognition.image_recog import Image_recog
-import face_recognition
 from flask import Flask, jsonify, request, redirect
 
 # You can change this to any folder on your system
