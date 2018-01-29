@@ -46,10 +46,51 @@ function take_smiling_snapshot() {
             "webcam_pic_smiling.jpg");
 
         var request = new XMLHttpRequest();
+        request.responseType = 'json';
         request.open("POST", "http://localhost:5001/register_account");
-        request.send(fd);
 
+        request.onload = function () {
+            var jsonResponse = request.response;
+            console.log(jsonResponse);
+            var is_similar = jsonResponse.is_similar;
+            var is_smiling_ratio = jsonResponse.is_smiling_ratio;
+
+            const GLYPHICON_OK_CLASSES = "glyphicon\n" +
+                    "                              glyphicon-ok";
+            const GLYPHICON_REMOVE_CLASSES = "glyphicon\n" +
+                    "                              glyphicon-remove";
+
+            $('#compareSpan').removeClass();
+            $('#smilingSpan').removeClass();
+
+            if (is_similar) {
+                $('#compareSpan').addClass(GLYPHICON_OK_CLASSES);
+            }
+            else {
+                $('#compareSpan').addClass(GLYPHICON_REMOVE_CLASSES);
+
+            }
+
+            if (is_smiling_ratio) {
+                $('#smilingSpan').addClass(GLYPHICON_OK_CLASSES);
+            }
+            else {
+                $('#smilingSpan').addClass(GLYPHICON_REMOVE_CLASSES);
+            }
+
+            if (is_similar && is_smiling_ratio) {
+                $('#successSpan').text("succeeded. Welcome !!");
+            }
+            else {
+                $('#successSpan').text("failed. Please retry.");
+            }
+            $("body").removeClass("loading");
+            // $('#myTab a:last').tab('show');
+        };
+        request.send(fd);
+        $("body").addClass("loading");
     });
+    // Show please wait
 }
 
 function dataURItoBlob(dataURI) {
@@ -71,8 +112,6 @@ function dataURItoBlob(dataURI) {
 
     return new Blob([ia], {type: mimeString});
 }
-
-startCamera();
 
 $(function () {
     $('a[title]').tooltip();
