@@ -80,7 +80,7 @@ function showTab(n) {
     // ... and fix the Previous/Next buttons:
     if (n == 0) {
         x[1].style.display = "none";
-    } 
+    }
     if (n == (x.length - 1)) {
         document.getElementById("nextBtn").style.display = "none";
     } else {
@@ -117,5 +117,5 @@ function dataURItoBlob(dataURI) {
         ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], { type: mimeString });
+    return new Blob([ia], {type: mimeString});
 }
