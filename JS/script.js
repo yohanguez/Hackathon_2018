@@ -72,8 +72,6 @@ function dataURItoBlob(dataURI) {
     return new Blob([ia], {type: mimeString});
 }
 
-startCamera();
-
 $(function () {
     $('a[title]').tooltip();
 });
