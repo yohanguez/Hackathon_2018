@@ -1,10 +1,8 @@
-FROM ubuntu:14.04
-RUN apt-get update
-RUN apt-get -y install python
+FROM frolvlad/alpine-python3
 RUN mkdir /data
 COPY . /data
 ENV DATADIR /data
-ENV PORT 8080
+ENV PORT 443
 EXPOSE ${PORT}
 WORKDIR ${DATADIR}
-CMD python -m SimpleHTTPServer ${PORT}
+CMD python server.py

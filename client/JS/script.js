@@ -45,10 +45,8 @@ function take_smiling_snapshot() {
         fd.append("webcam_pic_smiling", blob,
             "webcam_pic_smiling.jpg");
 
-        var request = new XMLHttpRequest();
+        var request = createCORSRequest("POST", "http://localhost:5001/register_account");
         request.responseType = 'json';
-        request.open("POST", "http://localhost:5001/register_account");
-
         request.onload = function () {
             var jsonResponse = request.response;
             console.log(jsonResponse);
@@ -56,9 +54,9 @@ function take_smiling_snapshot() {
             var is_smiling_ratio = jsonResponse.is_smiling_ratio;
 
             const GLYPHICON_OK_CLASSES = "glyphicon\n" +
-                    "                              glyphicon-ok";
+                "                              glyphicon-ok";
             const GLYPHICON_REMOVE_CLASSES = "glyphicon\n" +
-                    "                              glyphicon-remove";
+                "                              glyphicon-remove";
 
             $('#compareSpan').removeClass();
             $('#smilingSpan').removeClass();
@@ -116,3 +114,20 @@ function dataURItoBlob(dataURI) {
 $(function () {
     $('a[title]').tooltip();
 });
+
+// Create the XHR object.
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+        // XDomainRequest for IE.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+    } else {
+        // CORS not supported.
+        xhr = null;
+    }
+    return xhr;
+}
