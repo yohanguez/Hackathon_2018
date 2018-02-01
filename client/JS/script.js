@@ -45,7 +45,7 @@ function take_smiling_snapshot() {
         fd.append("webcam_pic_smiling", blob,
             "webcam_pic_smiling.jpg");
 
-        var request = createCORSRequest("POST", "http://localhost:5001/register_account");
+        var request = createCORSRequest("POST", window.location.protocol + "//" + window.location.hostname + ":5001/register_account");
         request.responseType = 'json';
         request.onload = function () {
             var jsonResponse = request.response;
