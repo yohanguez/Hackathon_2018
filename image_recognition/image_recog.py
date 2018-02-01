@@ -28,7 +28,8 @@ class Image_recog:
         known_encoding = face_recognition.face_encodings(known_image)[0]
         unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
 
-        results = face_recognition.compare_faces([known_encoding], unknown_encoding)
+        results = face_recognition.compare_faces([known_encoding],
+                                                 unknown_encoding)
         return results[0]
 
     def calc_distance(self, a, b):
@@ -91,7 +92,7 @@ class Image_recog:
         yint = y
         return slope, yint
 
-    def calc_triangle_area(self,a, b, c):
+    def calc_triangle_area(self, a, b, c):
         """
         Calculate triangle area given 3 points
 
@@ -108,13 +109,12 @@ class Image_recog:
         b = self.calc_distance_from_line(m, y, c)
         return .5 * h * b
 
-
     def is_smiling_ratio(self):
         image = face_recognition.load_image_file(self.im_smiling)
         face_landmarks_list = face_recognition.face_landmarks(image)
 
-        #print("I found {} face(s) in this photograph.".format(
-            #len(face_landmarks_list)))
+        # print("I found {} face(s) in this photograph.".format(
+        # len(face_landmarks_list)))
 
         if not self.is_similar_smiling():
             return False
@@ -166,13 +166,12 @@ class Image_recog:
             for facial_feature in facial_features:
                 d.line(face_landmarks[facial_feature], width=5)
 
-            #pil_image.show()
+            # pil_image.show()
 
         if ratio > 0.30:
             return True
         else:
             return False
-
 
     def is_similar_smiling(self):
         """
@@ -187,7 +186,8 @@ class Image_recog:
         known_encoding = face_recognition.face_encodings(known_image)[0]
         unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
 
-        results = face_recognition.compare_faces([known_encoding], unknown_encoding)
+        results = face_recognition.compare_faces([known_encoding],
+                                                 unknown_encoding)
         return results[0]
 
     def is_smiling(self):
@@ -235,7 +235,8 @@ class Image_recog:
                 left = (x_2[0], y_2[0])
                 right = (x_1[0], y_1[0])
                 top = (x_1[3], y_1[3])
-                distance_smile.append(self.calc_triangle_area(left, right, top))
+                distance_smile.append(
+                    self.calc_triangle_area(left, right, top))
 
                 # Let's trace out each facial feature in the image with a line!
                 pil_image = Image.fromarray(image)
@@ -252,9 +253,6 @@ class Image_recog:
         else:
             return (False and self.is_similar_smiling())
 
-
-#test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png",
- #"/Users/carlalasry/Desktop/carla_smile.jpg",
-        # "/Users/carlalasry/Desktop/carla_not_smile.jpg")
-
-
+# test_reco = Image_recog("/Users/carlalasry/Downloads/carla1.png",
+# "/Users/carlalasry/Desktop/carla_smile.jpg",
+# "/Users/carlalasry/Desktop/carla_not_smile.jpg")

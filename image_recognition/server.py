@@ -14,13 +14,24 @@
 # This example is based on the Flask file upload example: http://flask.pocoo.org/docs/0.12/patterns/fileuploads/
 
 # NOTE: This example requires flask to be installed! You can install it with pip:
-from image_recognition.image_recog import Image_recog
+from image_recog import Image_recog
 from flask import Flask, jsonify, request, redirect
 
 # You can change this to any folder on your system
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
+
+
+# Deal with cross origin domains.
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers',
+                         'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 
 def allowed_file(filename):
