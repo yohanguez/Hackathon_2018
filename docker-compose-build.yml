@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  client:
+    image: jhagege/recognify_client
+    build: client
+    ports:
+     - "443:443"
+
+  server:
+    image: jhagege/recognify_server
+    build: image_recognition
+    ports:
+     - "5001:5001"
